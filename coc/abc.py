@@ -35,7 +35,7 @@ if TYPE_CHECKING:
 
 BUILDING_FILE_PATH = Path(__file__).parent.joinpath(
     Path("static/buildings.json"))
-
+OBJECT_ID = 2000
 
 class BaseClan:
     """
@@ -330,7 +330,6 @@ class DataContainerHolder:
         with open(self.FILE_PATH) as fp:
             data = ujson.load(fp)
 
-        id = 2000
         for c, [supercell_name, meta] in enumerate(data.items()):
 
             # Not interested if it doesn't have a TID, since it likely isn't a real troop.
@@ -360,7 +359,7 @@ class DataContainerHolder:
                 name=english_aliases[meta["TID"][0]]["EN"][0],
                 lab_to_townhall=lab_to_townhall,
             )
-            id += 1
+            OBJECT_ID += 1
             self.items.append(new_item)
             self.item_lookup[new_item.name] = new_item
 
